@@ -225,3 +225,30 @@ function checkConditionsUse(){
   return isValid;
 }
 
+
+function validate(){
+  // reinitialise les erreurs de la verification precedente
+  removeErrorMessages();
+
+  // console.log('first',checkFirst());
+  // console.log('last',checkLast());
+  // console.log('email',checkEmail());
+  // console.log('birthdate',checkBirthdate());
+  // console.log('quantity',checkQuantity());
+  // console.log('location',checkLocation());
+  // console.log('onditionsUse',checkConditionsUse());
+
+  let isAllValid;
+  
+  if(checkFirst() & checkLast() & checkEmail() & checkBirthdate() & checkQuantity() & checkLocation() & checkConditionsUse()){
+    isAllValid = true;
+  } else {
+    isAllValid = false;
+  }
+  console.log('isAllValid',isAllValid)
+
+  // return false;
+  return isAllValid;
+}
+
+
