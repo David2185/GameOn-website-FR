@@ -118,3 +118,110 @@ function checkFirst(){
   return isValid;
 }
 
+
+// Vérifie si le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
+function checkLast(){
+  let isValid = true;
+  let textMessage = '';
+
+  if(lastField.value==''){
+    isValid = false;
+    textMessage = 'Veuillez indiquer votre nom';
+  }
+  else if(lastField.value.length<2){
+    isValid = false;
+    textMessage = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+  }
+
+  if(!isValid){
+    createErrorMessage(lastField,textMessage);
+  }
+  
+  return isValid;
+}
+
+function checkEmail(){
+  let isValid = true;
+  let textMessage = '';
+
+  if(emailField.value==''){
+    isValid = false;
+    textMessage = 'Veuillez indiquer votre email';
+  }
+
+  if(!isValid){
+    createErrorMessage(emailField,textMessage);
+  }
+  
+  return isValid;
+}
+
+function checkBirthdate(){
+  let isValid = true;
+  let textMessage = '';
+
+  if(birthdateField.value==''){
+    isValid = false;
+    textMessage = 'Veuillez indiquer votre date de naissance';
+  }
+
+  if(!isValid){
+    createErrorMessage(birthdateField,textMessage);
+  }
+  
+  return isValid;
+}
+
+function checkQuantity(){
+  let isValid = true;
+  let textMessage = '';
+
+  if(quantityField.value==''){
+    isValid = false;
+    textMessage = 'Veuillez indiquer à combien de tournois GameOn avez-vous déjà participé';
+  }
+
+  if(!isValid){
+    createErrorMessage(quantityField,textMessage);
+  }
+  
+  return isValid;
+}
+
+function checkLocation(){
+  let isValid=true;
+  textMessage = 'Veuillez choisir une ville';
+  
+  // Si le nombre de tournoi est vide ou superieur a zero faire le test
+  if(quantityField.value!=0){
+    isValid=false;
+    locationFields.forEach(locationField => {
+      if (locationField.checked) {
+          isValid = true;
+      }
+    });
+  }
+  
+  if(!isValid){
+    createErrorMessage(locationFields,textMessage);
+  }
+
+  return isValid;
+}
+
+function checkConditionsUse(){
+  let isValid = true;
+  let textMessage = '';
+
+  if(!conditionsUseField.checked){
+    isValid = false;
+    textMessage = 'Veuillez vérifier que vous acceptez les termes et conditions.';
+  }
+
+  if(!isValid){
+    createErrorMessage(conditionsUseField,textMessage);
+  }
+  
+  return isValid;
+}
+
