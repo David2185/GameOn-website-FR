@@ -11,7 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const closeModal = document.getElementById("close-modal");
+const closeModalBtn = document.getElementById("close-modal");
 const first = document.getElementById("first");
 const last = document.getElementById("last");
 const email = document.getElementById("email");
@@ -26,13 +26,6 @@ const location6 = document.getElementById("location6");
 const submit = document.querySelector(".btn-submit");
 const checkbox1 = document.getElementById("check1");
 const checkbox2 = document.getElementById("check2");
-
-let errorBorderColor = "#FF4E60";
-let errorBorderWidth = "10px";
-let errorTextColor = "#FF4E60";
-
-
-
 
 
 
@@ -52,47 +45,55 @@ function launchModal() {
 
 //function close Modale
 
-function closeModalBtn() {
+function closeModal() {
   modalbg.style.display = "none";
 }
 
 
 // fonction pour les erreurs de modal
 
-function errorHander () {
-
+function errorHander (elt) {
+    elt.setAttribute.style.borderColor = "red";
 }
 //fonction validation via submit
 
 function checkFirst () {
-  if (first.value === ""){
+  errorHander(first);
+  if (first.value.trim() === "") {
       alert("Veuillez entre votre prénom");
       first.setAttribute.style.textContent = "red";
+  } else if (first.value.length < 2) {
+    alert("Veuillez saisr un minimum de 2 caractères");
   }
 }
 
 function checkLast () {
-  if (last.value === ""){
+  if (last.value.trim() === ""){
       alert("Veuillez entre votre nom");
   }
 }
 
 function checkEmail () {
-  if (email.value === ""){
+  if (email.value.trim() === ""){
       alert("Veuillez saisir une adresse mail valide");
   }
 }
 
 function checkBirthdate () {
-  if (birthdate.value === ""){
+  if (birthdate.value.trim() === ""){
       alert("Veuillez saisir votre date de naissance");
   }
 }
 
 function checkQuantity () {
-  if (quantity.value === ""){
+  if (quantity.value.trim() === ""){
       alert("Veuillez indiquer votre nombre de partiipations à un tournoi");
   }
+}
+
+function check () {
+  checkFirst(), checkLast(), checkQuantity(), checkBirthdate(), checkEmail()
+  // closeModal
 }
 
 submit.addEventListener("click", checkFirst, checkLast, checkEmail, checkBirthdate, checkQuantity);
@@ -103,7 +104,7 @@ submit.addEventListener("click", checkFirst, checkLast, checkEmail, checkBirthda
 
 //Fermer la modale
 
-closeModal.addEventListener("click", closeModalBtn);
+closeModalBtn.addEventListener("click", check);
 
 //Le formulaire doit être valide quand l'utilisateur clique sur "Submit"
 
