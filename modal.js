@@ -11,21 +11,23 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const closeModalBtn = document.getElementById("close-modal");
-const first = document.getElementById("first");
-const last = document.getElementById("last");
-const email = document.getElementById("email");
-const birthdate = document.getElementById("birthdate");
-const quantity = document.getElementById("quantity");
-const location1 = document.getElementById("location1");
-const location2 = document.getElementById("location2");
-const location3 = document.getElementById("location3");
-const location4 = document.getElementById("location4");
-const location5 = document.getElementById("location5");
-const location6 = document.getElementById("location6");
-const submit = document.querySelector(".btn-submit");
-const checkbox1 = document.getElementById("check1");
-const checkbox2 = document.getElementById("check2");
+
+// champs prénom
+const firstField = document.getElementById('first');
+// champs nom
+const lastField = document.getElementById('last');
+// champs email
+const emailField = document.getElementById('email');
+// champs date de naissance
+const birthdateField = document.getElementById('birthdate');
+// champs quantite (nombre de tournoi)
+const quantityField = document.getElementById('quantity');
+// boutons radios pour la localistation
+const locationFields = document.querySelectorAll('input[name="location"]');
+// checkbox
+const conditionsUseField = document.getElementById('checkbox1');
+// 
+const modalBody = document.querySelector('.modal-body');
 
 
 
@@ -45,66 +47,74 @@ function launchModal() {
 
 //function close Modale
 
-function closeModal() {
-  modalbg.style.display = "none";
+function closeModal(){
+  modalbg.style.display='none';
 }
+document.querySelector('.close').addEventListener("click", closeModal);
 
+// crée le message d'erreur pour le champs donner en parametre
+function createErrorMessage(field,textMessage){
+  // if(field.length){
+  //   console.log(true)
+  // } else {
+  //   console.log(false)
+  // }
 
-// fonction pour les erreurs de modal
-
-function errorHander (elt) {
-    elt.setAttribute.style.borderColor = "red";
-}
-//fonction validation via submit
-
-function checkFirst () {
-  errorHander(first);
-  if (first.value.trim() === "") {
-      alert("Veuillez entre votre prénom");
-      first.setAttribute.style.textContent = "red";
-  } else if (first.value.length < 2) {
-    alert("Veuillez saisr un minimum de 2 caractères");
+  // si n'est pas un ensemble de champs
+  if(!field.length){ 
+    // ajout de la bordure pour le champs invalide
+    field.style.border = '2px solid red';
+    // ajout de la classe au le champs invalide
+    field.classList.add('invalid-field');
+  } else {
+    // sinon selectionner le premier champs de l'ensemble pour pouvoir ajouter le message d'erreur
+    field = field[0]
   }
+  // création la 'div' pour le message d'erreur
+  let errorMessage = document.createElement('div');
+  // ajout de la classe a la 'div' du message
+  errorMessage.classList.add('error');
+  // ajout du texte a la 'div' du message
+  errorMessage.innerHTML = textMessage;
+  // ajoute le message d'erreur dans le parent du champs actuel
+  field.parentNode.append(errorMessage);
 }
 
-function checkLast () {
-  if (last.value.trim() === ""){
-      alert("Veuillez entre votre nom");
+// supprime les messages d'erreur
+function removeErrorMessages(){
+  // tous les messages d'erreur
+  let errors = document.querySelectorAll('.error');
+  // supprime chaque message d'erreur
+  errors.forEach((error) =>{
+    error.remove();
+  });
+
+  //tous les champs invalides
+  let invalidFields = document.querySelectorAll('.invalid-field');
+  // supprime la bordure de chaque champs invalides 
+  invalidFields.forEach((invalidField) =>{
+    invalidField.style.border = 'none';
+  });
+}
+
+// Vérifie si le champ prénom a un minimum de 2 caractères / n'est pas vide.
+function checkFirst(){
+  let isValid = true;
+  let textMessage = '';
+
+  if(firstField.value==''){
+    isValid = false;
+    textMessage = 'Veuillez indiquer votre prénom';
   }
-}
-
-function checkEmail () {
-  if (email.value.trim() === ""){
-      alert("Veuillez saisir une adresse mail valide");
+  else if(firstField.value.length<2){
+    isValid = false;
+    textMessage = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
   }
-}
 
-function checkBirthdate () {
-  if (birthdate.value.trim() === ""){
-      alert("Veuillez saisir votre date de naissance");
+  if(!isValid){
+    createErrorMessage(firstField,textMessage);
   }
+  
+  return isValid;
 }
-
-function checkQuantity () {
-  if (quantity.value.trim() === ""){
-      alert("Veuillez indiquer votre nombre de partiipations à un tournoi");
-  }
-}
-
-function check () {
-  checkFirst(), checkLast(), checkQuantity(), checkBirthdate(), checkEmail()
-  // closeModal
-}
-
-submit.addEventListener("click", checkFirst, checkLast, checkEmail, checkBirthdate, checkQuantity);
-//2: créer une fonction qui vérifie les champs remplis ou non que je pourrais utiliser sur l'addEvent 
-
-//3: chaque check de champs doit être une fonction
-
-
-//Fermer la modale
-
-closeModalBtn.addEventListener("click", check);
-
-//Le formulaire doit être valide quand l'utilisateur clique sur "Submit"
 
