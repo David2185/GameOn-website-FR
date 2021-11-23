@@ -29,9 +29,6 @@ const conditionsUseField = document.getElementById('checkbox1');
 // 
 const modalBody = document.querySelector('.modal-body');
 
-
-
-
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -40,13 +37,7 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-
-//début du p4
-
-//fonctions
-
-//function close Modale
-
+// fermer la modal
 function closeModal(){
   modalbg.style.display='none';
 }
@@ -117,7 +108,6 @@ function checkFirst(){
   
   return isValid;
 }
-
 
 // Vérifie si le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
 function checkLast(){
@@ -225,7 +215,6 @@ function checkConditionsUse(){
   return isValid;
 }
 
-
 function validate(){
   // reinitialise les erreurs de la verification precedente
   removeErrorMessages();
@@ -251,4 +240,16 @@ function validate(){
   return isAllValid;
 }
 
+function launchValidateModal(){
+  let matches = document.URL.match(/\?first=(.+)&last/);
+  if(matches){
+    let first = matches[1];
+    modalbg.style.display = "flex";
+    modalBody.innerHTML = '<div style="font-size:2rem;text-align:center;display:flex;align-items:center;height:70%"><div>Merci '+first+' !<br/>Votre réservation a été reçue.</div></div><button class="btn-signup" style="margin:auto;" onclick="closeModal()">Fermer</button>';
+    // modalBody.style.display = "flex";
+    // modalBody.style.alignItems = 'center';
+    modalBody.style.height = '100%';
+  }
+}
 
+window.onload = launchValidateModal()
