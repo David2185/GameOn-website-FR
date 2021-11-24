@@ -234,7 +234,7 @@ function validate(){
   } else {
     isAllValid = false;
   }
-  console.log('isAllValid',isAllValid)
+  // console.log('isAllValid',isAllValid)
 
   // return false;
   return isAllValid;
