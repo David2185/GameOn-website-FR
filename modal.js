@@ -45,12 +45,6 @@ document.querySelector('.close').addEventListener("click", closeModal);
 
 // crée le message d'erreur pour le champs donner en parametre
 function createErrorMessage(field,textMessage){
-  // if(field.length){
-  //   console.log(true)
-  // } else {
-  //   console.log(false)
-  // }
-
   // si n'est pas un ensemble de champs
   if(!field.length){ 
     // ajout de la bordure pour le champs invalide
@@ -219,13 +213,6 @@ function validate(){
   // reinitialise les erreurs de la verification precedente
   removeErrorMessages();
 
-  // console.log('first',checkFirst());
-  // console.log('last',checkLast());
-  // console.log('email',checkEmail());
-  // console.log('birthdate',checkBirthdate());
-  // console.log('quantity',checkQuantity());
-  // console.log('location',checkLocation());
-  // console.log('onditionsUse',checkConditionsUse());
 
   let isAllValid;
   
@@ -234,9 +221,6 @@ function validate(){
   } else {
     isAllValid = false;
   }
-  // console.log('isAllValid',isAllValid)
-
-  // return false;
   return isAllValid;
 }
 
@@ -246,8 +230,6 @@ function launchValidateModal(){
     let first = matches[1];
     modalbg.style.display = "flex";
     modalBody.innerHTML = '<div style="font-size:2rem;text-align:center;display:flex;align-items:center;height:70%"><div>Merci '+first+' !<br/>Votre réservation a été reçue.</div></div><button class="btn-signup" style="margin:auto;" onclick="closeModal()">Fermer</button>';
-    // modalBody.style.display = "flex";
-    // modalBody.style.alignItems = 'center';
     modalBody.style.height = '100%';
   }
 }
